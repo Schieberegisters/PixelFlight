@@ -1,0 +1,2 @@
+"""Static gesture recognition package."""
+
