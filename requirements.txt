@@ -1,0 +1,10 @@
+tensorflow==2.15.0
+mediapipe==0.10.9
+opencv-python
+scikit-learn
+matplotlib
+numpy<2.0.0
+protobuf==3.20.3
+pytest
+djitellopy
+pandas
