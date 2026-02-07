@@ -111,10 +111,10 @@ class TestDataCollection:
             return True
 
         with patch("os.path.exists", side_effect=exists_side_effect), \
-             patch("os.makedirs"), \
-             patch("os.listdir", return_value=[]), \
-             patch("numpy.load", return_value=np.zeros(1662)), \
-             patch("numpy.save") as mock_save:
+            patch("os.makedirs"), \
+            patch("os.listdir", return_value=[]), \
+            patch("numpy.load", return_value=np.zeros(1662)), \
+            patch("numpy.save") as mock_save:
             
             with patch("Dynamic.data_collection.SEQUENCE_LENGTH", 1): 
                 collector._generate_augmentations("test_action", 0, False)
@@ -127,18 +127,16 @@ class TestDataCollection:
         collector = DataCollector(append=True)
         
         with patch("os.path.exists", return_value=True), \
-             patch("os.listdir", return_value=["0", "1", "2"]), \
-             patch("os.makedirs") as mock_mk, \
-             patch("numpy.load", return_value=np.zeros(1662)), \
-             patch("numpy.save") as mock_save, \
-             patch("random.choice", return_value=0), \
-             patch.object(collector, "_generate_augmentations") as mock_aug:
+            patch("os.listdir", return_value=["0", "1", "2"]), \
+            patch("os.makedirs") as mock_mk, \
+            patch("numpy.load", return_value=np.zeros(1662)), \
+            patch("numpy.save") as mock_save, \
+            patch("random.choice", return_value=0), \
+            patch.object(collector, "_generate_augmentations") as mock_aug:
             
             with patch("Dynamic.data_collection.NO_SEQUENCES", 1), \
-                 patch("Dynamic.data_collection.SEQUENCE_LENGTH", 1):
-                
+                patch("Dynamic.data_collection.SEQUENCE_LENGTH", 1):
                 collector._extend_dataset()
-                
                 assert mock_mk.called
                 assert mock_save.called
                 assert mock_aug.called
@@ -153,28 +151,28 @@ class TestDataCollection:
         
         # MOCK EVERYTHING to prevent real IO and UI
         with patch.object(collector, "_setup_directories"), \
-             patch.object(collector, "_show_countdown", return_value=True), \
-             patch("Dynamic.data_collection.mediapipe_detection") as mock_detect, \
-             patch("Dynamic.data_collection.extract_keypoints") as mock_extract, \
-             patch("Dynamic.data_collection.draw_styled_landmarks") as mock_draw, \
-             patch("numpy.save"), \
-             patch("cv2.imshow"), \
-             patch("cv2.waitKey", return_value=0), \
-             patch("os.makedirs"), \
-             patch("os.path.exists", return_value=False): # <--- FIX: Force "Not Exists" to trigger recording
+            patch.object(collector, "_show_countdown", return_value=True), \
+            patch("Dynamic.data_collection.mediapipe_detection") as mock_detect, \
+            patch("Dynamic.data_collection.extract_keypoints") as mock_extract, \
+            patch("Dynamic.data_collection.draw_styled_landmarks") as mock_draw, \
+            patch("numpy.save"), \
+            patch("cv2.imshow"), \
+            patch("cv2.waitKey", return_value=0), \
+            patch("os.makedirs"), \
+            patch("os.path.exists", return_value=False):
             
             mock_detect.return_value = (np.zeros((100,100,3)), MagicMock())
             
             with patch("Dynamic.data_collection.ACTIONS", ["TEST_ACTION"]), \
-                 patch("Dynamic.data_collection.NO_SEQUENCES", 1), \
-                 patch("Dynamic.data_collection.SEQUENCE_LENGTH", 1):
-                 
-                 collector.run()
-                 
-                 # Now this assertion should pass because we didn't skip the loop
-                 mock_detect.assert_called()
-                 mock_extract.assert_called()
-                 mock_draw.assert_called()
+                patch("Dynamic.data_collection.NO_SEQUENCES", 1), \
+                patch("Dynamic.data_collection.SEQUENCE_LENGTH", 1):
+                
+                collector.run()
+                
+                # Now this assertion should pass because we didn't skip the loop
+                mock_detect.assert_called()
+                mock_extract.assert_called()
+                mock_draw.assert_called()
 
 def run_tests_directly() -> None:
     """Entry point for direct script execution."""

@@ -44,16 +44,15 @@ class TestDroneControl:
     @pytest.fixture
     def mock_dependencies(self):
         """Mocks hardware, ML Models, and MediaPipe components."""
-        # Use mediapipe.solutions to avoid AttributeError
         with patch("DroneControl.drone_control.joblib.load") as mock_joblib, \
-             patch("DroneControl.drone_control.load_dynamic_model") as mock_load_dyn, \
-             patch("DroneControl.drone_control.Tello") as mock_tello_cls, \
-             patch("DroneControl.drone_control.cv2.VideoCapture") as mock_cap, \
-             patch("DroneControl.drone_control.mp_holistic.Holistic") as mock_holistic, \
-             patch("DroneControl.drone_control.annotate_frame") as mock_annotate, \
-             patch("DroneControl.drone_control.extract_keypoints") as mock_extract, \
-             patch("DroneControl.drone_control.landmark_normalization") as mock_norm, \
-             patch("mediapipe.solutions.drawing_utils.draw_landmarks") as mock_draw:
+            patch("DroneControl.drone_control.load_dynamic_model") as mock_load_dyn, \
+            patch("DroneControl.drone_control.Tello") as mock_tello_cls, \
+            patch("DroneControl.drone_control.cv2.VideoCapture") as mock_cap, \
+            patch("DroneControl.drone_control.mp_holistic.Holistic") as mock_holistic, \
+            patch("DroneControl.drone_control.annotate_frame") as mock_annotate, \
+            patch("DroneControl.drone_control.extract_keypoints") as mock_extract, \
+            patch("DroneControl.drone_control.landmark_normalization") as mock_norm, \
+            patch("mediapipe.solutions.drawing_utils.draw_landmarks") as mock_draw:
             
             # Setup Static Model
             mock_static_model = MagicMock()
@@ -167,7 +166,7 @@ class TestDroneControl:
         mock_dependencies["dynamic_model"].predict.return_value = mock_dyn_probs
         
         # Setup Static Prediction: XYCONTROL (Index 4) 
-        # We avoid HALT (Index 2) because HALT triggers an early 'return' which ignores dynamic actions
+        # avoid HALT (Index 2) because HALT triggers an early 'return' which ignores dynamic actions
         mock_dependencies["static_model"].predict_proba.return_value = np.array([[0.0, 0.0, 0.0, 0.0, 1.0]])
         
         mock_dependencies["extract"].return_value = np.zeros(1662)
