@@ -2,8 +2,6 @@
 
 This folder contains the **unit and integration-style tests** for PixelFlight. The suite is organized by domain (`Static`, `Dynamic`, `DroneControl`) and is designed to run reliably on **Windows CI** without requiring real hardware (webcams, drones) by using extensive mocking.
 
-For the global project introduction, environment setup, and dependency versions, see the root `README.md`.
-
 ---
 
 ## 1) Project Vision & Stack
@@ -15,7 +13,11 @@ For the global project introduction, environment setup, and dependency versions,
 - model wiring (custom Keras layers, safe loading)
 - control logic mapping (commands, cooldowns, thresholds)
 
-**Stack & CI:** defined at project level. See the root `README.md` and `.github/workflows/ci.yaml`.
+**Tooling used in this folder:**
+
+- `pytest` + `unittest.mock`
+- synthetic data via `numpy`/`pandas`
+- model-related checks via `tensorflow` where needed
 
 ---
 
@@ -41,21 +43,16 @@ Supporting entrypoints:
 
 ## 3) Local Setup (The 10-Minute Start)
 
-### Environment setup & running
+### Run commands
 
-Use the root `README.md` for venv creation, dependency installation, and how to run the full suite.
+| Goal | Command |
+|---|---|
+| Run all tests (wrapper) | `python runTests.py` |
+| Run all tests (pytest) | `pytest -v tests -p no:cacheprovider --disable-warnings` |
 
 ---
 
 ## 4) Development Workflow
-
-### Branching
-
-Suggested naming:
-
-- `feature/tests-<topic>`
-- `fix/tests-<topic>`
-- `chore/tests-<topic>`
 
 ### Testing style & conventions
 

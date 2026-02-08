@@ -2,15 +2,18 @@
 
 This folder contains the **static / single-frame** hand gesture recognition tooling used in PixelFlight. It focuses on classifying a **single hand pose** (no temporal sequence) using **MediaPipe HandLandmarker** + a lightweight **feature vector** and a classical ML classifier (Random Forest).
 
-For the global project introduction, environment setup, and dependency versions, see the root `README.md`.
-
 ---
 
 ## 1) Project Vision & Stack
 
 **Vision:** detect a hand from a webcam frame, extract a compact numeric representation, and classify it into a discrete command (e.g. `FORWARD`, `TAKEOFF`, `XYCONTROL`) for fast, low-latency control.
 
-**Stack & versions:** defined at project level. See the root `README.md` and `requirements.txt`.
+**Core building blocks (module-level):**
+
+- **MediaPipe Tasks HandLandmarker** → 21 hand landmarks
+- **Feature engineering** (`normalize_landmarks`) → 15 distance-based features
+- **Classifier** (`RandomForestClassifier`) → predicts a static gesture label
+- **Persistence** (`joblib`) → saves/loads `.joblib` artifacts
 
 ---
 
@@ -46,9 +49,10 @@ Related configuration (outside this folder):
 
 ## 3) Local Setup (The 10-Minute Start)
 
-### Environment setup
+### Prerequisites (specific to this module)
 
-Use the root `README.md` for venv creation, dependency installation, and test commands.
+- A working webcam for `trainingDataPrepper.py`
+- MediaPipe task model present at `Static/models/hand_landmarker.task`
 
 ### Verify MediaPipe asset exists
 
@@ -62,15 +66,7 @@ Static/models/hand_landmarker.task
 
 ## 4) Development Workflow
 
-### Branching
-
-Suggested naming:
-
-- `feature/static-<topic>`
-- `fix/static-<topic>`
-- `chore/static-<topic>`
-
-### Coding standards (pragmatic)
+### Implementation guidelines (specific to `Static/`)
 
 - Keep **feature definitions stable**: changing `normalize_landmarks` changes the meaning of your dataset and invalidates saved models.
 - Keep model assets in `Static/models/` and don’t hardcode absolute paths.
@@ -123,12 +119,8 @@ When you train a model, ensure that **your dataset labels** match the labels you
 Before opening a PR that changes `Static/`:
 
 - **Tests**: `pytest -v tests/Static ...` passes.
-- **Docs**: update this README if you change:
-  - feature vector definition (`normalize_landmarks`)
-  - expected CSV schema / paths in `trainingDataPrepper.py` or `randomForest.py`
-  - model asset locations under `Static/models/`
-- **Backward compatibility**: if you change features, either retrain + replace models or version the artifacts.
-- **No silent label drift**: keep label names consistent across collection, training, and inference.
+- **Feature stability**: the 15-D feature vector definition remains consistent with existing datasets and `.joblib` models.
+- **Label consistency**: labels used in collection/training match the labels expected by the consumer.
 
 ---
 

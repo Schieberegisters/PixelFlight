@@ -7,8 +7,6 @@ This folder contains the **runtime controller** that connects gesture recognitio
 
 The implementation is designed to run in **debug mode** (no drone connection) or in **live mode** (connects to a DJI Tello via `djitellopy`).
 
-For the global project introduction, environment setup, and dependency versions, see the root `README.md`.
-
 ---
 
 ## 1) Project Vision & Stack
@@ -19,7 +17,12 @@ For the global project introduction, environment setup, and dependency versions,
 - avoid command flicker with stability logic for dynamic actions
 - prevent repeated dangerous actions via cooldown + threading
 
-**Stack & versions:** defined at project level. See the root `README.md` and `requirements.txt`.
+**Core building blocks (module-level):**
+
+- **Static model** (`joblib`) using a 15-feature hand vector
+- **Dynamic model** (Keras) consuming a keypoint sequence buffer
+- **Command state machine** (`CurrentCommand`)
+- **Dispatch layer** (RC control vs special actions with cooldown + threading)
 
 ---
 
@@ -53,23 +56,21 @@ Key dependencies outside this folder:
 
 ## 3) Local Setup (The 10-Minute Start)
 
-### Environment setup & running
+### Prerequisites (specific to this module)
 
-Use the root `README.md` for venv creation, dependency installation, and how to run `main.py` in debug/live mode.
+- A webcam (used by `DroneControl.DroneControl` via OpenCV)
+- Model artifacts available at the configured paths (see `config/drone.py`)
+- (Live mode) a DJI Tello reachable on the network
+
+### Running
+
+The runtime entrypoint is `main.py` (repo root). Quit with `q`.
 
 ---
 
 ## 4) Development Workflow
 
-### Branching
-
-Suggested naming:
-
-- `feature/dronecontrol-<topic>`
-- `fix/dronecontrol-<topic>`
-- `chore/dronecontrol-<topic>`
-
-### Coding standards (pragmatic)
+### Implementation guidelines (specific to `DroneControl/`)
 
 - Keep runtime constants in `config/` (thresholds, velocities, model paths).
 - Prefer **pure mapping functions** and small methods for testability.
@@ -126,14 +127,10 @@ Special actions (`TAKE_ONOFF`, `FLIP`) are executed in a **background thread** a
 
 Before opening a PR that touches `DroneControl/`:
 
-- **Run tests**: `pytest -v tests/DroneControl ...`
-- **Debug run works**: `python main.py --debug` starts and exits cleanly with `q`
-- **No hardware dependency in tests**: Drone, models, OpenCV, and MediaPipe must be mockable
-- **Config consistency**: label maps and sequence lengths remain aligned with:
-  - `config/gestures.py`
-  - `config/dynamic.py`
-  - `config/drone.py`
-- **Safety preserved**: cooldown/threading for special actions is not bypassed
+- **Tests**: `pytest -v tests/DroneControl ...` passes.
+- **Safety preserved**: cooldown/threading for special actions still prevents repeated takeoff/land/flip triggers.
+- **Stable dynamic actions**: `SEQUENCE_LENGTH`/`STABLE_LENGTH` behavior remains consistent with the control logic.
+- **Debug mode remains usable**: camera loop runs without a drone connection and exits cleanly.
 
 ---
 

@@ -2,15 +2,18 @@
 
 This folder contains the **dynamic / sequence-based gesture recognition** pipeline: data collection with **MediaPipe Holistic**, preprocessing with an **anti-leakage split**, and model training/evaluation (default: a **Spatial-Temporal GCN**).
 
-For the global project introduction, environment setup, and dependency versions, see the root `README.md`.
-
 ---
 
 ## 1) Project Vision & Stack
 
 **Vision:** classify short sequences of human pose/hand motion into discrete actions (e.g. `FLY_LEFT`, `ROTATE`, `FLIP`) using webcam-based keypoints. This module focuses on *temporal* gestures (motion over time), not single-frame hand signs.
 
-**Stack & versions:** defined at project level. See the root `README.md` and `requirements.txt`.
+**Core building blocks (module-level):**
+
+- **MediaPipe Holistic** → landmark detection
+- **Keypoint vectors** (`extract_keypoints`) → 1662 features per frame
+- **Sequence windowing** → fixed-length sequences for classification
+- **Keras model** → default architecture is **ST‑GCN** (`model.py`)
 
 ---
 
@@ -43,9 +46,10 @@ Related configuration (outside this folder):
 
 ## 3) Local Setup (The 10-Minute Start)
 
-### Environment setup
+### Prerequisites (specific to this module)
 
-Use the root `README.md` for venv creation, dependency installation, and common commands.
+- A working webcam (OpenCV capture uses device `0` by default) for `data_collection.py`
+- Enough disk space for `.npy` datasets under `Dynamic/TrainingData/`
 
 ### Dataset location & layout
 
@@ -81,19 +85,12 @@ Each `*.npy` frame file stores a **1662-length** vector:
 
 ## 4) Development Workflow
 
-### Branching
-
-Suggested naming (keep it consistent and searchable):
-
-- `feature/dynamic-<short-topic>`
-- `fix/dynamic-<short-topic>`
-- `chore/dynamic-<short-topic>`
-
-### Coding standards (pragmatic)
+### Implementation guidelines (specific to `Dynamic/`)
 
 - Prefer **small, typed functions** and readable names.
 - Keep paths and constants in `config/` (don’t hardcode dataset/model paths in training scripts).
 - If you add/change labels, update `config/gestures.py` and any downstream assumptions (tests, visualization).
+ - Treat changes to splitting/augmentation policies as **breaking** (they affect metrics comparability).
 
 ### Running tests
 
@@ -145,13 +142,10 @@ If you want to train with flipped samples, you must change the preprocessing pol
 
 Before opening a PR that touches `Dynamic/`:
 
-- **Tests**: `pytest -v tests/Dynamic ...` passes (or `python runTests.py`).
-- **Docs**: update this `Dynamic/README.md` if you change:
-  - dataset layout / paths (`config/dynamic.py`)
-  - label set (`config/gestures.py`)
-  - model architecture entrypoint (`train.py` → `model.py` vs `lstm.py`)
-- **Reproducibility**: configs remain in `config/` and scripts run from repo root without manual path edits.
-- **No silent behavior changes**: if you change augmentation or split policy, document *why* (leakage, anatomy, robustness).
+- **Tests**: `pytest -v tests/Dynamic ...` passes.
+- **Data compatibility**: dataset layout (`DATASET_DIR`) and label set (`DYNAMIC_ACTIONS`) remain consistent with saved artifacts.
+- **No leakage regressions**: sequence-ID-based split still keeps augmentations grouped with their source sequence.
+- **Model loading remains safe**: custom layers (`DataProcessor`, `GraphConv`) still serialize/deserialize cleanly.
 
 ---
 
