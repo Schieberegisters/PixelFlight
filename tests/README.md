@@ -52,28 +52,6 @@ Supporting entrypoints:
 
 ---
 
-## 4) Development Workflow
-
-### Testing style & conventions
-
-- Prefer **pure logic tests** (math, IO orchestration) and use mocks for anything that touches:
-  - webcams / OpenCV UI (`cv2.VideoCapture`, `cv2.imshow`, `cv2.waitKey`)
-  - MediaPipe inference
-  - filesystem-heavy operations (dataset creation, model persistence)
-  - drone hardware/SDK
-- Use small synthetic arrays and deterministic seeds when relevant.
-- Keep tests fast: CI expects this to run as a standard job on `windows-latest`.
-
-### Running a subset
-
-| Goal | Command |
-|---|---|
-| Only Static tests | `pytest -v tests/Static -p no:cacheprovider --disable-warnings` |
-| Only Dynamic tests | `pytest -v tests/Dynamic -p no:cacheprovider --disable-warnings` |
-| Only DroneControl tests | `pytest -v tests/DroneControl -p no:cacheprovider --disable-warnings` |
-
----
-
 ## 5) Architectural Patterns
 
 ### “No hardware required” principle

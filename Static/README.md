@@ -64,23 +64,6 @@ Static/models/hand_landmarker.task
 
 ---
 
-## 4) Development Workflow
-
-### Implementation guidelines (specific to `Static/`)
-
-- Keep **feature definitions stable**: changing `normalize_landmarks` changes the meaning of your dataset and invalidates saved models.
-- Keep model assets in `Static/models/` and don’t hardcode absolute paths.
-- Prefer small, testable functions; `tests/Static/` already mocks OpenCV/MediaPipe to keep tests fast.
-
-### Running tests
-
-| Goal | Command |
-|---|---|
-| Run all tests | `python runTests.py` |
-| Run only Static tests | `pytest -v tests/Static -p no:cacheprovider --disable-warnings` |
-
----
-
 ## 5) Architectural Patterns
 
 ### Feature engineering: 15-D distance vector
@@ -96,11 +79,11 @@ This intentionally ignores absolute position and focuses on **hand shape**.
 
 ```mermaid
 flowchart LR
-  A[Webcam frame] --> B[MediaPipe HandLandmarker]
-  B --> C[21 hand landmarks]
-  C --> D[normalize_landmarks: 15-D vector]
-  D --> E[Classifier: RandomForest]
-  E --> F[Static gesture label]
+  A["Webcam frame"] --> B["MediaPipe HandLandmarker"]
+  B --> C["21 hand landmarks"]
+  C --> D["normalize_landmarks: 15-D vector"]
+  D --> E["Classifier: RandomForest"]
+  E --> F["Static gesture label"]
 ```
 
 ### Dataset & label conventions (important)

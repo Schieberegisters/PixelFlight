@@ -114,7 +114,7 @@ See `tests/README.md` for patterns and troubleshooting.
 ### System overview
 
 ```mermaid
-flowchart LR
+flowchart TD
   A["Webcam frame"] --> B["MediaPipe"]
   B --> C1["Static pipeline\nHandLandmarker -> 15-D features -> joblib model"]
   B --> C2["Dynamic pipeline\nHolistic -> 1662 keypoints/frame -> TF model"]

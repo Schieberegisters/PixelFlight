@@ -68,38 +68,21 @@ The runtime entrypoint is `main.py` (repo root). Quit with `q`.
 
 ---
 
-## 4) Development Workflow
-
-### Implementation guidelines (specific to `DroneControl/`)
-
-- Keep runtime constants in `config/` (thresholds, velocities, model paths).
-- Prefer **pure mapping functions** and small methods for testability.
-- Any change to gesture/action labels must stay consistent with `config/gestures.py`.
-
-### Running tests
-
-| Goal | Command |
-|---|---|
-| Run all tests | `python runTests.py` |
-| Run DroneControl tests only | `pytest -v tests/DroneControl -p no:cacheprovider --disable-warnings` |
-
----
-
 ## 5) Architectural Patterns
 
 ### End-to-end runtime flow
 
 ```mermaid
-flowchart LR
-  A[Webcam frame] --> B[MediaPipe Holistic via Dynamic.annotate_frame]
-  B --> C[Static: right-hand landmarks -> 15 features -> joblib model]
-  B --> D[Dynamic: keypoints 1662/frame -> deque window -> TF model]
-  C --> E[static_gesture]
-  D --> F[dynamic_action (stability-gated)]
-  E --> G[_handle_gesture_logic]
+flowchart TD
+  A["Webcam frame"] --> B["MediaPipe Holistic via Dynamic.annotate_frame"]
+  B --> C["Static: right-hand landmarks -> 15 features -> joblib model"]
+  B --> D["Dynamic: keypoints 1662/frame -> deque window -> TF model"]
+  C --> E["static_gesture"]
+  D --> F["dynamic_action (stability-gated)"]
+  E --> G["_handle_gesture_logic"]
   F --> G
-  G --> H[Command state: CurrentCommand]
-  H --> I[Dispatch: RC control or special thread + cooldown]
+  G --> H["Command state: CurrentCommand"]
+  H --> I["Dispatch: RC control or special thread + cooldown"]
 ```
 
 ### Stability gating for dynamic actions

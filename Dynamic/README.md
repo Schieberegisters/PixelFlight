@@ -83,36 +83,18 @@ Each `*.npy` frame file stores a **1662-length** vector:
 
 ---
 
-## 4) Development Workflow
-
-### Implementation guidelines (specific to `Dynamic/`)
-
-- Prefer **small, typed functions** and readable names.
-- Keep paths and constants in `config/` (don’t hardcode dataset/model paths in training scripts).
-- If you add/change labels, update `config/gestures.py` and any downstream assumptions (tests, visualization).
- - Treat changes to splitting/augmentation policies as **breaking** (they affect metrics comparability).
-
-### Running tests
-
-| Goal | Command |
-|---|---|
-| Run all tests | `python runTests.py` |
-| Run only Dynamic tests | `pytest -v tests/Dynamic -p no:cacheprovider --disable-warnings` |
-
----
-
 ## 5) Architectural Patterns
 
 ### Dataflow (high level)
 
 ```mermaid
 flowchart LR
-  A[Webcam frames] --> B[MediaPipe Holistic]
-  B --> C[extract_keypoints: 1662-dim vector / frame]
-  C --> D[Sequence window: 20 frames]
-  D --> E[data_preprocessing: anti-leakage split by sequence id]
-  E --> F[model.py: ST-GCN (DataProcessor + GraphConv + TCN)]
-  F --> G[Softmax over DYNAMIC_ACTIONS]
+  A["Webcam frames"] --> B["MediaPipe Holistic"]
+  B --> C["extract_keypoints: 1662-dim vector / frame"]
+  C --> D["Sequence window: 20 frames"]
+  D --> E["data_preprocessing: anti-leakage split by sequence id"]
+  E --> F["model.py: ST-GCN (DataProcessor + GraphConv + TCN)"]
+  F --> G["Softmax over DYNAMIC_ACTIONS"]
 ```
 
 ### Anti-leakage split (important)
