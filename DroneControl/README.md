@@ -7,6 +7,8 @@ This folder contains the **runtime controller** that connects gesture recognitio
 
 The implementation is designed to run in **debug mode** (no drone connection) or in **live mode** (connects to a DJI Tello via `djitellopy`).
 
+For the global project introduction, environment setup, and dependency versions, see the root `README.md`.
+
 ---
 
 ## 1) Project Vision & Stack
@@ -17,14 +19,7 @@ The implementation is designed to run in **debug mode** (no drone connection) or
 - avoid command flicker with stability logic for dynamic actions
 - prevent repeated dangerous actions via cooldown + threading
 
-**Core stack (see repo `requirements.txt`):**
-
-- **Python**: (recommended) 3.10+
-- **OpenCV**: `opencv-python` (camera input + UI)
-- **MediaPipe**: `mediapipe==0.10.9` (Holistic pose/hands)
-- **TensorFlow/Keras**: `tensorflow==2.15.0` (dynamic model inference)
-- **scikit-learn + joblib**: static model inference (`predict_proba`)
-- **djitellopy**: DJI Tello SDK client
+**Stack & versions:** defined at project level. See the root `README.md` and `requirements.txt`.
 
 ---
 
@@ -58,36 +53,9 @@ Key dependencies outside this folder:
 
 ## 3) Local Setup (The 10-Minute Start)
 
-### Prerequisites
+### Environment setup & running
 
-- A webcam (OpenCV uses camera index `0` by default)
-- (Live mode) a DJI Tello on the same network and `djitellopy` working
-
-### Setup commands (Windows / PowerShell)
-
-| Goal | Command |
-|---|---|
-| Create venv | `python -m venv .venv` |
-| Activate venv | `.\.venv\Scripts\Activate.ps1` |
-| Install deps | `pip install -r requirements.txt` |
-
-### Run in debug mode (recommended first)
-
-Debug mode shows the UI windows but **does not connect to the drone**:
-
-| Goal | Command |
-|---|---|
-| Start controller in debug | `python main.py --debug` |
-
-Quit with `q`.
-
-### Run in live mode
-
-Live mode connects to the Tello and sends RC commands / special actions:
-
-| Goal | Command |
-|---|---|
-| Start controller (live) | `python main.py` |
+Use the root `README.md` for venv creation, dependency installation, and how to run `main.py` in debug/live mode.
 
 ---
 

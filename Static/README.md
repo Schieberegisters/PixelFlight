@@ -2,20 +2,15 @@
 
 This folder contains the **static / single-frame** hand gesture recognition tooling used in PixelFlight. It focuses on classifying a **single hand pose** (no temporal sequence) using **MediaPipe HandLandmarker** + a lightweight **feature vector** and a classical ML classifier (Random Forest).
 
+For the global project introduction, environment setup, and dependency versions, see the root `README.md`.
+
 ---
 
 ## 1) Project Vision & Stack
 
 **Vision:** detect a hand from a webcam frame, extract a compact numeric representation, and classify it into a discrete command (e.g. `FORWARD`, `TAKEOFF`, `XYCONTROL`) for fast, low-latency control.
 
-**Core stack (see repo `requirements.txt`):**
-
-- **Python**: (recommended) 3.10+
-- **MediaPipe**: `mediapipe==0.10.9` (Tasks API / HandLandmarker)
-- **OpenCV**: `opencv-python` (webcam + rendering)
-- **Data/ML**: `numpy<2.0.0`, `scikit-learn`, `pandas`
-- **Model persistence**: `joblib` (via scikit-learn)
-- **Tests**: `pytest`
+**Stack & versions:** defined at project level. See the root `README.md` and `requirements.txt`.
 
 ---
 
@@ -51,18 +46,9 @@ Related configuration (outside this folder):
 
 ## 3) Local Setup (The 10-Minute Start)
 
-### Prerequisites
+### Environment setup
 
-- A working webcam (OpenCV uses camera index `0` by default)
-- Python + pip installed
-
-### Setup commands (Windows / PowerShell)
-
-| Goal | Command |
-|---|---|
-| Create venv | `python -m venv .venv` |
-| Activate venv | `.\.venv\Scripts\Activate.ps1` |
-| Install deps | `pip install -r requirements.txt` |
+Use the root `README.md` for venv creation, dependency installation, and test commands.
 
 ### Verify MediaPipe asset exists
 

@@ -2,6 +2,8 @@
 
 This folder contains the **unit and integration-style tests** for PixelFlight. The suite is organized by domain (`Static`, `Dynamic`, `DroneControl`) and is designed to run reliably on **Windows CI** without requiring real hardware (webcams, drones) by using extensive mocking.
 
+For the global project introduction, environment setup, and dependency versions, see the root `README.md`.
+
 ---
 
 ## 1) Project Vision & Stack
@@ -13,14 +15,7 @@ This folder contains the **unit and integration-style tests** for PixelFlight. T
 - model wiring (custom Keras layers, safe loading)
 - control logic mapping (commands, cooldowns, thresholds)
 
-**Core stack:**
-
-- **pytest**: test discovery + assertions
-- **unittest.mock**: patching OpenCV, MediaPipe, filesystem, and model loading
-- **numpy / pandas / scikit-learn**: synthetic data + classifier testing
-- **tensorflow/keras**: model construction + custom-layer serialization tests
-
-CI runs on **Windows** using Python **3.10.9** (see `.github/workflows/ci.yaml`).
+**Stack & CI:** defined at project level. See the root `README.md` and `.github/workflows/ci.yaml`.
 
 ---
 
@@ -46,24 +41,9 @@ Supporting entrypoints:
 
 ## 3) Local Setup (The 10-Minute Start)
 
-### Prerequisites
+### Environment setup & running
 
-- Python + pip
-
-### Setup commands (Windows / PowerShell)
-
-| Goal | Command |
-|---|---|
-| Create venv | `python -m venv .venv` |
-| Activate venv | `.\.venv\Scripts\Activate.ps1` |
-| Install deps | `pip install -r requirements.txt` |
-
-### Run the full suite
-
-| Goal | Command |
-|---|---|
-| Run all tests (recommended) | `python runTests.py` |
-| Run all tests via pytest | `pytest -v tests -p no:cacheprovider --disable-warnings` |
+Use the root `README.md` for venv creation, dependency installation, and how to run the full suite.
 
 ---
 

@@ -1,6 +1,8 @@
 # Dynamic (Sequence) Gesture Recognition
 
-This folder contains the **dynamic / sequence-based gesture recognition** pipeline used in PixelFlight: data collection with **MediaPipe Holistic**, preprocessing with an **anti-leakage split**, and model training/evaluation (default: a **Spatial-Temporal GCN**).
+This folder contains the **dynamic / sequence-based gesture recognition** pipeline: data collection with **MediaPipe Holistic**, preprocessing with an **anti-leakage split**, and model training/evaluation (default: a **Spatial-Temporal GCN**).
+
+For the global project introduction, environment setup, and dependency versions, see the root `README.md`.
 
 ---
 
@@ -8,14 +10,7 @@ This folder contains the **dynamic / sequence-based gesture recognition** pipeli
 
 **Vision:** classify short sequences of human pose/hand motion into discrete actions (e.g. `FLY_LEFT`, `ROTATE`, `FLIP`) using webcam-based keypoints. This module focuses on *temporal* gestures (motion over time), not single-frame hand signs.
 
-**Core stack (see `requirements.txt`):**
-
-- **Python**: (recommended) 3.10+ to match TensorFlow 2.15 constraints on Windows
-- **TensorFlow/Keras**: `tensorflow==2.15.0`
-- **MediaPipe**: `mediapipe==0.10.9`
-- **OpenCV**: `opencv-python` (webcam + visualization)
-- **Data/ML**: `numpy<2.0.0`, `scikit-learn`, `pandas`, `matplotlib`
-- **Tests**: `pytest`
+**Stack & versions:** defined at project level. See the root `README.md` and `requirements.txt`.
 
 ---
 
@@ -48,18 +43,9 @@ Related configuration (outside this folder):
 
 ## 3) Local Setup (The 10-Minute Start)
 
-### Prerequisites
+### Environment setup
 
-- A working webcam (OpenCV capture uses device `0` by default)
-- Python + pip
-
-### Setup commands (Windows / PowerShell)
-
-| Goal | Command |
-|---|---|
-| Create venv | `python -m venv .venv` |
-| Activate venv | `.\.venv\Scripts\Activate.ps1` |
-| Install deps | `pip install -r requirements.txt` |
+Use the root `README.md` for venv creation, dependency installation, and common commands.
 
 ### Dataset location & layout
 
