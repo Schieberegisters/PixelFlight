@@ -88,7 +88,7 @@ Each `*.npy` frame file stores a **1662-length** vector:
 ### Dataflow (high level)
 
 ```mermaid
-flowchart LR
+flowchart TD
   A["Webcam frames"] --> B["MediaPipe Holistic"]
   B --> C["extract_keypoints: 1662-dim vector / frame"]
   C --> D["Sequence window: 20 frames"]

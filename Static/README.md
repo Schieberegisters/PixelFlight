@@ -78,7 +78,7 @@ This intentionally ignores absolute position and focuses on **hand shape**.
 ### End-to-end flow
 
 ```mermaid
-flowchart LR
+flowchart TD
   A["Webcam frame"] --> B["MediaPipe HandLandmarker"]
   B --> C["21 hand landmarks"]
   C --> D["normalize_landmarks: 15-D vector"]
