@@ -4,7 +4,7 @@ This folder contains the **dynamic / sequence-based gesture recognition** pipeli
 
 ---
 
-## 1) Project Vision & Stack
+## 1) Purpose & Stack
 
 **Vision:** classify short sequences of human pose/hand motion into discrete actions (e.g. `FLY_LEFT`, `ROTATE`, `FLIP`) using webcam-based keypoints. This module focuses on *temporal* gestures (motion over time), not single-frame hand signs.
 
@@ -17,7 +17,7 @@ This folder contains the **dynamic / sequence-based gesture recognition** pipeli
 
 ---
 
-## 2) Repository Roadmap (The Map)
+## 2) Structure
 
 Where things live inside `Dynamic/`:
 
@@ -135,17 +135,6 @@ If you want to train with flipped samples, you must change the preprocessing pol
 
 - `train.py` imports `create_model` from `Dynamic.model` ⇒ **ST-GCN is the default** training architecture.
 - `lstm.py` exists as a baseline/legacy option, but it is not wired into `train.py` unless you switch imports.
-
----
-
-## 6) Definition of Done (DoD)
-
-Before opening a PR that touches `Dynamic/`:
-
-- **Tests**: `pytest -v tests/Dynamic ...` passes.
-- **Data compatibility**: dataset layout (`DATASET_DIR`) and label set (`DYNAMIC_ACTIONS`) remain consistent with saved artifacts.
-- **No leakage regressions**: sequence-ID-based split still keeps augmentations grouped with their source sequence.
-- **Model loading remains safe**: custom layers (`DataProcessor`, `GraphConv`) still serialize/deserialize cleanly.
 
 ---
 

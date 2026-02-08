@@ -4,7 +4,7 @@ This folder contains the **static / single-frame** hand gesture recognition tool
 
 ---
 
-## 1) Project Vision & Stack
+## 1) Purpose & Stack
 
 **Vision:** detect a hand from a webcam frame, extract a compact numeric representation, and classify it into a discrete command (e.g. `FORWARD`, `TAKEOFF`, `XYCONTROL`) for fast, low-latency control.
 
@@ -17,7 +17,7 @@ This folder contains the **static / single-frame** hand gesture recognition tool
 
 ---
 
-## 2) Repository Roadmap (The Map)
+## 2) Structure
 
 Where things live inside `Static/`:
 
@@ -111,16 +111,6 @@ There are two “label sources” in the repo:
 - `trainingDataPrepper.py` uses its own key mapping (includes `LANDING`)
 
 When you train a model, ensure that **your dataset labels** match the labels you want to use at runtime.
-
----
-
-## 6) Definition of Done (DoD)
-
-Before opening a PR that changes `Static/`:
-
-- **Tests**: `pytest -v tests/Static ...` passes.
-- **Feature stability**: the 15-D feature vector definition remains consistent with existing datasets and `.joblib` models.
-- **Label consistency**: labels used in collection/training match the labels expected by the consumer.
 
 ---
 

@@ -9,7 +9,7 @@ The implementation is designed to run in **debug mode** (no drone connection) or
 
 ---
 
-## 1) Project Vision & Stack
+## 1) Purpose & Stack
 
 **Vision:** translate human hand/body gestures into safe, stable drone commands in real time:
 
@@ -26,7 +26,7 @@ The implementation is designed to run in **debug mode** (no drone connection) or
 
 ---
 
-## 2) Repository Roadmap (The Map)
+## 2) Structure
 
 Inside `DroneControl/`:
 
@@ -120,17 +120,6 @@ Special actions (`TAKE_ONOFF`, `FLIP`) are executed in a **background thread** a
 - If static gesture is `HALT`, movement is immediately suppressed (commands reset to IDLE for that cycle).
 - Movement actions map to directional commands (`FLY_LEFT`, `FLY_UP`, …).
 - Motor power is derived from `VELOCITY_FACTOR_X/Y/Z` and the current command state.
-
----
-
-## 6) Definition of Done (DoD)
-
-Before opening a PR that touches `DroneControl/`:
-
-- **Tests**: `pytest -v tests/DroneControl ...` passes.
-- **Safety preserved**: cooldown/threading for special actions still prevents repeated takeoff/land/flip triggers.
-- **Stable dynamic actions**: `SEQUENCE_LENGTH`/`STABLE_LENGTH` behavior remains consistent with the control logic.
-- **Debug mode remains usable**: camera loop runs without a drone connection and exits cleanly.
 
 ---
 

@@ -4,7 +4,7 @@ This folder contains the **unit and integration-style tests** for PixelFlight. T
 
 ---
 
-## 1) Project Vision & Stack
+## 1) Purpose & Stack
 
 **Vision:** keep the gesture-recognition pipelines and drone control logic safe to refactor by validating:
 
@@ -21,7 +21,7 @@ This folder contains the **unit and integration-style tests** for PixelFlight. T
 
 ---
 
-## 2) Repository Roadmap (The Map)
+## 2) Structure
 
 The test suite is split by feature area:
 
@@ -89,21 +89,6 @@ This keeps the suite runnable on CI machines with no webcam/drone access.
 ### Configuration injection via monkeypatch
 
 Some tests (notably `tests/DroneControl/test_drone_control.py`) use `monkeypatch` to override runtime constants (thresholds, sequence lengths, gesture label maps) so tests stay deterministic and aligned with the production logic.
-
----
-
-## 6) Definition of Done (DoD)
-
-Before opening a PR that changes code covered by `tests/`:
-
-- **Run tests locally**: `python runTests.py`
-- **Keep tests deterministic**: no real network/hardware calls, no UI windows required.
-- **Update/extend tests** when you change:
-  - gesture label sets (`config/gestures.py`)
-  - dataset directory layouts or preprocessing rules
-  - model loading / custom layer registration
-  - DroneControl command mapping logic
-- **CI compatibility**: tests must pass on Windows with Python 3.10.x.
 
 ---
 
