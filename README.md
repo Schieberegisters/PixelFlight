@@ -116,14 +116,14 @@ See `tests/README.md` for patterns and troubleshooting.
 ```mermaid
 flowchart TD
   A["Webcam frame"] --> B["MediaPipe"]
-  B --> C1["Static pipeline\nHandLandmarker -> 15-D features -> joblib model"]
-  B --> C2["Dynamic pipeline\nHolistic -> 1662 keypoints/frame -> TF model"]
+  B --> C1["Static pipeline<br/>HandLandmarker -> 15-D features -> joblib model"]
+  B --> C2["Dynamic pipeline<br/>Holistic -> 1662 keypoints/frame -> TF model"]
   C1 --> D["static_gesture"]
-  C2 --> E["dynamic_action\n(stability gated)"]
+  C2 --> E["dynamic_action<br/>(stability gated)"]
   D --> F["DroneControl mapping"]
   E --> F
-  F --> G["Dispatch\nRC control or special thread + cooldown"]
-  G --> H["Tello drone\n(live mode)"]
+  F --> G["Dispatch<br/>RC control or special thread + cooldown"]
+  G --> H["Tello drone<br/>(live mode)"]
 ```
 
 ### Static vs Dynamic responsibilities
