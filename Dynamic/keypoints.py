@@ -1,5 +1,8 @@
 from typing import Any, Final
 import numpy as np
+import os
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 # --- DATA LAYOUT CONSTANTS ---
 # Pose: 33 landmarks * (x, y, z, visibility)

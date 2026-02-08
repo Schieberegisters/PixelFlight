@@ -2,9 +2,9 @@
 Model definition for sign language recognition.
 Defines the LSTM neural network architecture.
 """
+from __future__ import annotations
 import sys
 import os
-from __future__ import annotations
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Dense
 from typing import Final

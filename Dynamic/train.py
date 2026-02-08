@@ -4,15 +4,16 @@ from __future__ import annotations
 
 import os
 import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 from typing import Any
 
 import numpy as np
 from sklearn.metrics import accuracy_score, classification_report, multilabel_confusion_matrix
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint, TensorBoard
 
-from data_preprocessing import preprocess_data
-from model import create_model
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from Dynamic.data_preprocessing import preprocess_data
+from Dynamic.model import create_model
 from config.dynamic import EPOCHS, LOG_DIR, MODEL_PATH
 from config.gestures import DYNAMIC_ACTIONS
 

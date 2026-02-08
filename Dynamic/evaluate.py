@@ -3,10 +3,11 @@ from typing import Tuple, Any, Final, List
 from sklearn.metrics import accuracy_score, multilabel_confusion_matrix
 import sys
 import os
-# --- LOCAL MODULES ---
-from data_preprocessing import preprocess_data
-from model import load_model
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+# --- LOCAL MODULES ---
+from Dynamic.data_preprocessing import preprocess_data
+from Dynamic.model import load_model
 from config.dynamic import MODEL_PATH
 
 # --- CONSTANTS ---

@@ -9,9 +9,10 @@ from typing import Final, List, Tuple, Optional
 import cv2
 import numpy as np
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 # --- LOCAL MODULES ---
-from keypoints import extract_keypoints
-from mediapipe_utils import mp_holistic, mediapipe_detection, draw_styled_landmarks
+from Dynamic.keypoints import extract_keypoints
+from Dynamic.mediapipe_utils import mp_holistic, mediapipe_detection, draw_styled_landmarks
 from config.dynamic import  NO_SEQUENCES, SEQUENCE_LENGTH,DATASET_DIR
 from config.gestures import DYNAMIC_ACTIONS
 from config.mpParameters import MIN_DETECTION_CONFIDENCE, MIN_TRACKING_CONFIDENCE

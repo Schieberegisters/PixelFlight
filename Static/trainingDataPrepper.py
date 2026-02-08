@@ -4,18 +4,21 @@ Captures hand landmarks and saves them to CSV for training.
 """
 
 from __future__ import annotations
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from pathlib import Path
 from typing import Final, List, Dict, Union
 import cv2
 import numpy as np
-from data_utils import (
+from Static.data_utils import (
     flip_frame, 
     normalize_landmarks, 
     save_data_to_csv, 
     expand_training_data
 )
-from mediapipe_utils import (
+from Static.mediapipe_utils import (
     get_hand_landmarker, 
     process_frame_with_mediapipe, 
     draw_hand_landmarks

@@ -3,6 +3,9 @@ from typing import Any, Tuple, Final
 import cv2
 import numpy as np
 import mediapipe as mp
+import sys 
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 # --- MEDIAPIPE SETUP ---
 mp_holistic = mp.solutions.holistic
