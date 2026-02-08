@@ -1,17 +1,18 @@
 import argparse
 import math
 import os
+import sys
 import random
 import shutil
 import time
 from typing import Final, List, Tuple, Optional
 import cv2
 import numpy as np
-
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 # --- LOCAL MODULES ---
-from .keypoints import extract_keypoints
-from .mediapipe_utils import mp_holistic, mediapipe_detection, draw_styled_landmarks
-from config.dynamic import DATA_PATH, NO_SEQUENCES, SEQUENCE_LENGTH
+from keypoints import extract_keypoints
+from mediapipe_utils import mp_holistic, mediapipe_detection, draw_styled_landmarks
+from config.dynamic import  NO_SEQUENCES, SEQUENCE_LENGTH,DATASET_DIR
 from config.gestures import DYNAMIC_ACTIONS
 from config.mpParameters import MIN_DETECTION_CONFIDENCE, MIN_TRACKING_CONFIDENCE
 
@@ -160,26 +161,26 @@ class DataCollector:
 
     def _setup_directories(self) -> None:
         """Initializes dataset directory structure."""
-        if self.rewrite and os.path.exists(DATA_PATH):
-            shutil.rmtree(DATA_PATH)
+        if self.rewrite and os.path.exists(DATASET_DIR):
+            shutil.rmtree(DATASET_DIR)
         
-        os.makedirs(DATA_PATH, exist_ok=True)
+        os.makedirs(DATASET_DIR, exist_ok=True)
         for action in ACTIONS:
-            os.makedirs(os.path.join(DATA_PATH, action), exist_ok=True)
+            os.makedirs(os.path.join(DATASET_DIR, action), exist_ok=True)
 
     def _generate_augmentations(self, action: str, sequence: int, is_flipped: bool) -> None:
         """Creates rotated, translated, and scaled versions of a sequence."""
         suffix = "_flipped" if is_flipped else ""
-        base_dir = os.path.join(DATA_PATH, action, f"{sequence}{suffix}")
+        base_dir = os.path.join(DATASET_DIR, action, f"{sequence}{suffix}")
         
         if not os.path.exists(base_dir):
             return
 
         # Augmentation paths
         aug_types = {
-            "rot": os.path.join(DATA_PATH, action, f"{sequence}{suffix}_aug_rot"),
-            "trans": os.path.join(DATA_PATH, action, f"{sequence}{suffix}_aug_trans"),
-            "scale": os.path.join(DATA_PATH, action, f"{sequence}{suffix}_aug_scale"),
+            "rot": os.path.join(DATASET_DIR, action, f"{sequence}{suffix}_aug_rot"),
+            "trans": os.path.join(DATASET_DIR, action, f"{sequence}{suffix}_aug_trans"),
+            "scale": os.path.join(DATASET_DIR, action, f"{sequence}{suffix}_aug_scale"),
         }
 
         # Skip if already exists
@@ -218,7 +219,7 @@ class DataCollector:
         """Appends new sequences by copying and flipping existing data."""
         print("--- APPEND MODE ENABLED ---")
         for action in ACTIONS:
-            action_path = os.path.join(DATA_PATH, action)
+            action_path = os.path.join(DATASET_DIR, action)
             if not os.path.exists(action_path):
                 continue
 
@@ -296,8 +297,8 @@ class DataCollector:
             
             for action in ACTIONS:
                 for sequence in range(NO_SEQUENCES):
-                    dir_path = os.path.join(DATA_PATH, action, str(sequence))
-                    dir_path_flip = os.path.join(DATA_PATH, action, f"{sequence}_flipped")
+                    dir_path = os.path.join(DATASET_DIR, action, str(sequence))
+                    dir_path_flip = os.path.join(DATASET_DIR, action, f"{sequence}_flipped")
 
                     # Skip if exists and not rewriting
                     if not self.rewrite and os.path.exists(dir_path):

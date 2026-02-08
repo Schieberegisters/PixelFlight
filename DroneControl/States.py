@@ -1,5 +1,4 @@
 """State and command enums used by the drone controller."""
-
 from __future__ import annotations
 from enum import Enum, auto
 

@@ -13,7 +13,7 @@ VELOCITY_FACTOR_X: Final[float] = 0.3
 VELOCITY_FACTOR_Y: Final[float] = 0.3
 VELOCITY_FACTOR_Z: Final[float] = 0.3
 
-# --- Model artifact paths (project-relative) ---
+# --- Model artifact paths ---
 STATIC_MODEL_PATH: Final[str] = "Static/models/140k.joblib"
 DYNAMIC_MODEL_PATH: Final[str] = "Dynamic/models/actionNoFlip.keras"
 LANDMARKER_MODEL_PATH: Final[str] = "Dynamic/models/hand_landmarker.task"

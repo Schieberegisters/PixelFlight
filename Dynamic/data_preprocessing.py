@@ -1,13 +1,13 @@
 import functools
 import os
+import sys
 from concurrent.futures import ThreadPoolExecutor
 from typing import Dict, List, Tuple, Optional, Final
-
 import numpy as np
 from sklearn.model_selection import train_test_split
 from tensorflow.keras.utils import to_categorical
-
-from config.dynamic import DATA_PATH, NO_SEQUENCES, SEQUENCE_LENGTH, TEST_SIZE
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+from config.dynamic import DATASET_DIR, NO_SEQUENCES, SEQUENCE_LENGTH, TEST_SIZE
 from config.gestures import DYNAMIC_ACTIONS
 
 # --- CONSTANTS ---
@@ -55,7 +55,7 @@ class DataPreprocessor:
         Strictly excludes 'flipped' variants.
         """
         tasks = []
-        base_path = os.path.join(DATA_PATH, action, str(sequence_id))
+        base_path = os.path.join(DATASET_DIR, action, str(sequence_id))
 
         # 1. Original Sequence
         tasks.append((base_path, label))

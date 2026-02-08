@@ -4,12 +4,11 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Final
 
-# --- Paths (project-relative) ---
+# --- Paths---
 PROJECT_ROOT: Final[Path] = Path(__file__).resolve().parents[1]
-BASE_DIR: Final[Path] = PROJECT_ROOT  # Backwards-compatible alias
 DYNAMIC_DIR: Final[Path] = PROJECT_ROOT / "Dynamic"
 
-DATASET_DIR: Final[Path] = DYNAMIC_DIR / "TrainingData" / "DynamicRecognition_relational"
+DATASET_DIR: Final[Path] = DYNAMIC_DIR / "TrainingData" / "DynamicRecognition"
 DATA_PATH: Final[str] = str(DATASET_DIR)
 
 # --- Dataset / sequence parameters ---

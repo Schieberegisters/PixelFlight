@@ -9,13 +9,13 @@ from pathlib import Path
 from typing import Final, List, Dict, Union
 import cv2
 import numpy as np
-from .data_utils import (
+from data_utils import (
     flip_frame, 
     normalize_landmarks, 
     save_data_to_csv, 
     expand_training_data
 )
-from .mediapipe_utils import (
+from mediapipe_utils import (
     get_hand_landmarker, 
     process_frame_with_mediapipe, 
     draw_hand_landmarks
@@ -23,7 +23,7 @@ from .mediapipe_utils import (
 
 # --- CONFIGURATION ---
 BASE_DIR: Final[Path] = Path(__file__).resolve().parent
-OUTPUT_CSV_FILE: Final[Path] = BASE_DIR / "gesture_training_data.csv"
+OUTPUT_CSV_FILE: Final[Path] = BASE_DIR / "gesture_training_data_teststs.csv"
 MODEL_ASSET_PATH: Final[Path] = BASE_DIR / "models" / "hand_landmarker.task"
 
 # Mapping keys to Class Names
@@ -94,7 +94,7 @@ class DataCollector:
             cv2.putText(
                 frame, "Keys: [1-5] Select Class | [S] Start | [F] Stop | [Q] Quit", 
                 (10, frame.shape[0] - 20), 
-                cv2.FONT_HERSHEY_SIMPLEX, 0.5, (200, 200, 200), 1, cv2.LINE_AA
+                cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 1, cv2.LINE_AA
             )
 
     def _cleanup(self) -> None:

@@ -13,7 +13,6 @@ STATIC_HAND_GESTURES: Final[dict[int, str]] = {
 }
 
 # --- Dynamic model action labels ---
-# Kept as a NumPy array because downstream code relies on `.shape[0]`.
 DYNAMIC_ACTIONS: Final[np.ndarray] = np.array(
     [
         "TAKE_ONOFF",

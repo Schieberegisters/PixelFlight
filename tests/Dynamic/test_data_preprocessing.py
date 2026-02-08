@@ -76,7 +76,7 @@ class TestDataPreprocessing:
         paths = [t[0] for t in tasks]
         
         # Check specific suffixes
-        base_str = str(Path(data_preprocessing.DATA_PATH) / action / str(seq_id))
+        base_str = str(Path(data_preprocessing.DATASET_DIR) / action / str(seq_id))
         
         assert any(p == base_str for p in paths) # Original
         assert any("aug_rot" in p for p in paths)

@@ -1,7 +1,8 @@
 import numpy as np
 import tensorflow as tf
 from typing import Any, Dict, List, Union, Tuple, Final
-
+import sys
+import os
 from tensorflow.keras.layers import (
     Activation, Add, BatchNormalization, Conv2D, Dense, 
     Dropout, GlobalAveragePooling2D, Input, Layer
@@ -10,6 +11,7 @@ from tensorflow.keras.models import Model
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.models import load_model as keras_load_model
 
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 # --- CONFIG IMPORTS ---
 from config.dynamic import (
     NUM_NODES, SEQUENCE_LENGTH, INPUT_SHAPE, 
@@ -244,3 +246,4 @@ def load_model(model_path: str = MODEL_PATH) -> Model:
         model = create_model()
         model.load_weights(model_path)
         return model
+    

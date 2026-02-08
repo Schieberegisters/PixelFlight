@@ -2,14 +2,13 @@
 Model definition for sign language recognition.
 Defines the LSTM neural network architecture.
 """
-
+import sys
+import os
 from __future__ import annotations
-
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import LSTM, Dense
-
 from typing import Final
-
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from config.dynamic import INPUT_SHAPE, LOSS, METRICS, MODEL_PATH
 from config.gestures import DYNAMIC_ACTIONS
 
@@ -19,7 +18,7 @@ DENSE_UNITS: Final[tuple[int, int]] = (64, 32)
 
 
 def create_model() -> Sequential:
-    """Create and compile the legacy LSTM model."""
+    """Create and compile the LSTM model."""
 
     model = Sequential()
     

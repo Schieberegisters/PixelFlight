@@ -1,14 +1,15 @@
 import numpy as np
 from typing import Tuple, Any, Final, List
 from sklearn.metrics import accuracy_score, multilabel_confusion_matrix
-
+import sys
+import os
 # --- LOCAL MODULES ---
-from .data_preprocessing import preprocess_data
-from .model import load_model
+from data_preprocessing import preprocess_data
+from model import load_model
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from config.dynamic import MODEL_PATH
 
 # --- CONSTANTS ---
-# Use a high-level constant if specific evaluation settings are needed
 DEFAULT_MODEL_PATH: Final[str] = MODEL_PATH
 
 

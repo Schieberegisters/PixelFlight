@@ -3,14 +3,16 @@
 from __future__ import annotations
 
 import os
+import sys
 from typing import Any
 
 import numpy as np
 from sklearn.metrics import accuracy_score, classification_report, multilabel_confusion_matrix
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint, TensorBoard
 
-from .data_preprocessing import preprocess_data
-from .model import create_model
+from data_preprocessing import preprocess_data
+from model import create_model
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from config.dynamic import EPOCHS, LOG_DIR, MODEL_PATH
 from config.gestures import DYNAMIC_ACTIONS
 

@@ -12,7 +12,6 @@ from .drone import (
     VELOCITY_FACTOR_Z,
 )
 from .dynamic import (
-    BASE_DIR,
     CHANNELS,
     COLORS,
     DATA_PATH,
