@@ -16,7 +16,7 @@ The repository is split into four main areas: `Static/`, `Dynamic/`, `DroneContr
 
 **Core stack (see `requirements.txt`):**
 
-- **Python**: (recommended) 3.10+ (CI uses 3.10.9)
+- **Python**: (recommended) 3.10
 - **TensorFlow/Keras**: `tensorflow==2.15.0` (dynamic model inference/training)
 - **MediaPipe**: `mediapipe==0.10.9`
   - **Holistic** (pose + hands) for dynamic keypoints
@@ -90,7 +90,7 @@ Suggested naming:
 - `fix/<area>-<topic>` (e.g. `fix/dronecontrol-cooldown`)
 - `chore/<area>-<topic>` (e.g. `chore/tests-cleanup`)
 
-### Coding standards (pragmatic)
+### Coding standards 
 
 - Keep **constants and artifact paths** in `config/` (avoid hardcoding paths in scripts).
 - Keep **labels consistent**:
