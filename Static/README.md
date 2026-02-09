@@ -39,7 +39,6 @@ Where things live inside `Static/`:
     - `hand_landmarker.task`: MediaPipe hand detection/tracking model (required by the collector)
     - `*.joblib`: trained classical models (e.g. `140k.joblib`, `15-feature.joblib`)
     - `*.keras`: experimental neural models (not wired into `randomForest.py`)
-    - `yolov8n.pt`: auxiliary asset (not used by the scripts in this folder)
 
 Related configuration (outside this folder):
 
@@ -47,7 +46,7 @@ Related configuration (outside this folder):
 
 ---
 
-## 3) Local Setup (The 10-Minute Start)
+## 3) Local Setup
 
 ### Prerequisites (specific to this module)
 

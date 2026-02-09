@@ -41,7 +41,7 @@ Supporting entrypoints:
 
 ---
 
-## 3) Local Setup (The 10-Minute Start)
+## 3) Local Setup
 
 ### Run commands
 

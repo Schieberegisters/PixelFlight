@@ -46,7 +46,7 @@ High-level structure and where the “real work” lives:
 
 ---
 
-## 3) Local Setup (The 10-Minute Start)
+## 3) Local Setup
 
 ### Prerequisites
 

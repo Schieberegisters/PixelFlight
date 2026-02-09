@@ -54,7 +54,7 @@ Key dependencies outside this folder:
 
 ---
 
-## 3) Local Setup (The 10-Minute Start)
+## 3) Local Setup
 
 ### Prerequisites (specific to this module)
 
