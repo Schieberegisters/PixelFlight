@@ -47,10 +47,3 @@ def landmark_normalization(hand_points: Sequence[_HasXY]) -> list[float]:
             distances.append(calculate_distance(p1_x, p1_y, p2_x, p2_y))
 
     return distances
-
-__all__ = [
-    "calculate_distance",
-    "landmark_normalization",
-    "calculateDistance",
-    "LandmarkNormalization",
-]

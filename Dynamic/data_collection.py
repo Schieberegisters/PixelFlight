@@ -10,15 +10,13 @@ import cv2
 import numpy as np
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-# --- LOCAL MODULES ---
+# LOCAL MODULES
 from Dynamic.keypoints import extract_keypoints
 from Dynamic.mediapipe_utils import mp_holistic, mediapipe_detection, draw_styled_landmarks
+# Config
 from config.dynamic import  NO_SEQUENCES, SEQUENCE_LENGTH,DATASET_DIR
 from config.gestures import DYNAMIC_ACTIONS
 from config.mpParameters import MIN_DETECTION_CONFIDENCE, MIN_TRACKING_CONFIDENCE
-
-# --- CONSTANTS ---
-ACTIONS: Final[np.ndarray] = DYNAMIC_ACTIONS
 
 # Data Layout
 POSE_LEN: Final[int] = 33 * 4
@@ -166,7 +164,7 @@ class DataCollector:
             shutil.rmtree(DATASET_DIR)
         
         os.makedirs(DATASET_DIR, exist_ok=True)
-        for action in ACTIONS:
+        for action in DYNAMIC_ACTIONS:
             os.makedirs(os.path.join(DATASET_DIR, action), exist_ok=True)
 
     def _generate_augmentations(self, action: str, sequence: int, is_flipped: bool) -> None:
@@ -219,7 +217,7 @@ class DataCollector:
     def _extend_dataset(self) -> None:
         """Appends new sequences by copying and flipping existing data."""
         print("--- APPEND MODE ENABLED ---")
-        for action in ACTIONS:
+        for action in DYNAMIC_ACTIONS:
             action_path = os.path.join(DATASET_DIR, action)
             if not os.path.exists(action_path):
                 continue
@@ -296,7 +294,7 @@ class DataCollector:
             min_tracking_confidence=MIN_TRACKING_CONFIDENCE
         ) as holistic:
             
-            for action in ACTIONS:
+            for action in DYNAMIC_ACTIONS:
                 for sequence in range(NO_SEQUENCES):
                     dir_path = os.path.join(DATASET_DIR, action, str(sequence))
                     dir_path_flip = os.path.join(DATASET_DIR, action, f"{sequence}_flipped")

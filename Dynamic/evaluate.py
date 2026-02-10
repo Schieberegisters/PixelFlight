@@ -8,10 +8,8 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 # --- LOCAL MODULES ---
 from Dynamic.data_preprocessing import preprocess_data
 from Dynamic.model import load_model
-from config.dynamic import MODEL_PATH
+from config.dynamic import MODEL_PATH as DEFAULT_MODEL_PATH
 
-# --- CONSTANTS ---
-DEFAULT_MODEL_PATH: Final[str] = MODEL_PATH
 
 
 def evaluate_model(model_path: str = DEFAULT_MODEL_PATH) -> Tuple[float, np.ndarray]:

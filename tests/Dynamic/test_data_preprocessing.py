@@ -14,7 +14,7 @@ from Dynamic import data_preprocessing
 # Import specific components
 from Dynamic.data_preprocessing import (
     DataPreprocessor,
-    ACTIONS,
+    DYNAMIC_ACTIONS,
     SEQUENCE_LENGTH,
     AUGMENTATION_SUFFIXES
 )
@@ -28,11 +28,11 @@ class TestDataPreprocessing:
         label_map = DataPreprocessor._create_label_map()
         
         assert isinstance(label_map, dict)
-        assert len(label_map) == len(ACTIONS)
+        assert len(label_map) == len(DYNAMIC_ACTIONS)
         
         # Check first and last action mapping
-        assert label_map[ACTIONS[0]] == 0
-        assert label_map[ACTIONS[-1]] == len(ACTIONS) - 1
+        assert label_map[DYNAMIC_ACTIONS[0]] == 0
+        assert label_map[DYNAMIC_ACTIONS[-1]] == len(DYNAMIC_ACTIONS) - 1
 
     def test_load_single_sequence_success(self):
         """Verify loading a complete sequence of .npy files."""
@@ -102,7 +102,7 @@ class TestDataPreprocessing:
         # FIX: Patch 'train_test_split' where it is USED, not where it is defined.
         with patch("Dynamic.data_preprocessing.train_test_split", return_value=(mock_train_ids, mock_test_ids)), \
              patch.object(DataPreprocessor, "_load_single_sequence", return_value=dummy_seq), \
-             patch("Dynamic.data_preprocessing.ACTIONS", ["ACT_A", "ACT_B"]): 
+             patch("Dynamic.data_preprocessing.DYNAMIC_ACTIONS", ["ACT_A", "ACT_B"]): 
             
             # Expected Count Calculation:
             # Actions: 2 ("ACT_A", "ACT_B")

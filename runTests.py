@@ -16,7 +16,7 @@ def run_all_tests():
     sys.path.append(str(root_dir))
     
     print("=" * 60)
-    print(f"Starting Sign Language Project Test Suite")
+    print(f"Starting PixelFlight Project Test Suite")
     print(f"Root Directory: {root_dir}")
     print("=" * 60)
 

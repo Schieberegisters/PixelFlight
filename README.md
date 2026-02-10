@@ -63,6 +63,8 @@ High-level structure and where the “real work” lives:
 | Activate venv | `.\.venv\Scripts\Activate.ps1` |
 | Install dependencies | `pip install -r requirements.txt` |
 
+*Note*: The creation of the python venv has to be done with the 3.10 version, higher versions create compatibility issues with the required tensorflow version as it's not yet available for 3.11+
+
 ### Run the controller
 
 | Goal | Command |

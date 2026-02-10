@@ -11,7 +11,6 @@ from config.dynamic import DATASET_DIR, NO_SEQUENCES, SEQUENCE_LENGTH, TEST_SIZE
 from config.gestures import DYNAMIC_ACTIONS
 
 # --- CONSTANTS ---
-ACTIONS: Final[np.ndarray] = DYNAMIC_ACTIONS
 AUGMENTATION_SUFFIXES: Final[List[str]] = ['_aug_rot', '_aug_trans', '_aug_scale']
 
 
@@ -25,7 +24,7 @@ class DataPreprocessor:
     @staticmethod
     def _create_label_map() -> Dict[str, int]:
         """Maps action strings to integer labels."""
-        return {label: num for num, label in enumerate(ACTIONS)}
+        return {label: num for num, label in enumerate(DYNAMIC_ACTIONS)}
 
     @staticmethod
     def _load_single_sequence(path: str, sequence_length: int) -> Optional[np.ndarray]:
@@ -93,7 +92,7 @@ class DataPreprocessor:
 
         def _build_tasks(ids_list: np.ndarray) -> List[Tuple[str, int]]:
             tasks = []
-            for action in ACTIONS:
+            for action in DYNAMIC_ACTIONS:
                 label = label_map[action]
                 for seq_id in ids_list:
                     tasks.extend(cls._get_sequence_paths(action, seq_id, label))
@@ -127,7 +126,7 @@ class DataPreprocessor:
         X_test, y_test_idx = _execute_loading(test_tasks, "TEST")
 
         # One-hot encoding
-        num_classes = len(ACTIONS)
+        num_classes = len(DYNAMIC_ACTIONS)
         y_train = to_categorical(y_train_idx, num_classes=num_classes).astype(int)
         y_test = to_categorical(y_test_idx, num_classes=num_classes).astype(int)
 

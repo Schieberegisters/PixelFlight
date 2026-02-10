@@ -163,7 +163,7 @@ class TestDataCollection:
             
             mock_detect.return_value = (np.zeros((100,100,3)), MagicMock())
             
-            with patch("Dynamic.data_collection.ACTIONS", ["TEST_ACTION"]), \
+            with patch("Dynamic.data_collection.DYNAMIC_ACTIONS", ["TEST_ACTION"]), \
                 patch("Dynamic.data_collection.NO_SEQUENCES", 1), \
                 patch("Dynamic.data_collection.SEQUENCE_LENGTH", 1):
                 
