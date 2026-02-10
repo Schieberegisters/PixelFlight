@@ -28,7 +28,7 @@ The repository is split into four main areas: `Static/`, `Dynamic/`, `DroneContr
 
 ---
 
-## 2) Repository Roadmap (The Map)
+## 2) Repository Roadmap
 
 High-level structure and where the “real work” lives:
 
@@ -43,6 +43,7 @@ High-level structure and where the “real work” lives:
 - **`tests/`**: unit + integration-style tests organized by domain  
   - More: `tests/README.md`
 - **`config/`**: configuration constants (model paths, thresholds, sequence lengths, label maps)
+- **`.rules/`**: Description of rules for agentic coding
 
 ---
 
@@ -62,7 +63,7 @@ High-level structure and where the “real work” lives:
 | Activate venv | `.\.venv\Scripts\Activate.ps1` |
 | Install dependencies | `pip install -r requirements.txt` |
 
-### Run the controller (debug first)
+### Run the controller
 
 | Goal | Command |
 |---|---|
@@ -143,7 +144,7 @@ This reduces command flicker from noisy frames.
 
 ---
 
-## 6) Definition of Done (DoD)
+## 6) Definition of Done
 
 Before opening a Pull Request:
 

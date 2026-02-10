@@ -109,7 +109,7 @@ This avoids training on an augmented copy of the exact same motion you evaluate 
 ### “Flipped” data policy
 
 `data_collection.py` writes both original and `_flipped` sequences.  
-`data_preprocessing.py` **explicitly excludes flipped variants** by design (“anatomical consistency”).
+`data_preprocessing.py` **explicitly excludes flipped variants** by design ( this is done for anatomical consistency, it matters depending on wheter or not mirroring the gesture changes it's meaning).
 
 If you want to train with flipped samples, you must change the preprocessing policy accordingly.
 
