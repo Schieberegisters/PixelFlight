@@ -133,7 +133,7 @@ flowchart TD
 - **Dynamic** (`Dynamic/`): classifies *motion over time* (sequence window + stability filter).
 - **DroneControl** (`DroneControl/`): merges both signals and enforces safety rules (cooldown, `HALT` override).
 
-### Dynamic stability gating (why it matters)
+### Dynamic stability gating
 
 Dynamic actions are accepted only after:
 
